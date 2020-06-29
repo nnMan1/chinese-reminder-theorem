@@ -70,7 +70,9 @@ function calculate() {
         },
 
         function error(data, status) {
-            alert('Provjerite da li su svi parovi modula uzajamno prosti')
+            errorMessage.innerHTML = 'Provjerite da li su svi parovi modula uzajamno prosti'
+            errorMessage.style.visibility = "visible"
+            successMessage.style.visibility = 'hidden'
         }
     )
     
