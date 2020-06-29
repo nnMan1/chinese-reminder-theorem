@@ -64,7 +64,7 @@ function calculate() {
     })
     .then(
         function success(response) {
-            successMessage.innerHTML = 'x = '+response.x + '(mod '+ response.mod+')'
+            successMessage.innerHTML = 'x = '+response.x + ' (mod '+ response.mod+')'
             errorMessage.style.visibility = "hidden"
             successMessage.style.visibility = 'visible'
         },
