@@ -1,4 +1,6 @@
 let equationsList = document.querySelector("#equations")
+successMessage = document.querySelector('#success-message')
+errorMessage = document.querySelector('#error-message')
 
 function removeEquation(e) {
     e.target.parentElement.remove()
@@ -8,11 +10,11 @@ function addEquation() {
     li_elem = document.createElement('li')
     li_elem.innerHTML=   `
                         <p>x =</p>
-                        <input class='reminder_field' type="text">
+                        <input class='reminder_field form-control' type="text">
                         <p>(mod</p>
-                        <input class='mod' type="text">
+                        <input class='mod form-control' type="text">
                         <p>)</p>    
-                        <button  class='removeEquation' onclick="removeEquation(event);">-</button>        
+                        <button  class='removeEquation btn btn-danger' onclick="removeEquation(event);">-</button>        
                     `
 
     equationsList.appendChild(li_elem)
@@ -23,9 +25,17 @@ document.querySelector("#add-equation").addEventListener("click", e => {
 });
 
 function calculate() {
+
     equations = document.querySelectorAll('li')
 
     equations_array = []
+
+    if (equations.length == 0) {
+        errorMessage.innerHTML = 'Morate zadati makar jednu jednačinu'
+        errorMessage.style.visibility = "visible"
+        successMessage.style.visibility = 'hidden'
+        throw 'Dodaj neku jednacinu'
+    }
 
     equations.forEach(equation => {
         mod = equation.querySelector('.mod').value
@@ -35,8 +45,10 @@ function calculate() {
         reminder = parseInt(reminder)
 
         if(isNaN(mod) || isNaN(reminder)) {
-            alert('MOraju sva poblja biti popunjena cijelim brojevima')
-            throw 'MOraju sva poblja biti popunjena cijelim brojevima'
+            errorMessage.innerHTML = 'Moraju sva poblja biti popunjena cijelim brojevima'
+            errorMessage.style.visibility = "visible"
+            successMessage.style.visibility = 'hidden'
+            throw 'Moraju sva poblja biti popunjena cijelim brojevima'
         }
     
         equations_array.push(mod)
@@ -52,13 +64,9 @@ function calculate() {
     })
     .then(
         function success(response) {
-            setTimeout(function(){
-                decrypted.value = response.decrypted
-                key.value = response.key
-                document.querySelector('.spinner-border').style.visibility = "hidden"
-                alert
-            }, 500);
-            alert('x = '+response.x + '(mod '+ response.mod+')')
+            successMessage.innerHTML = 'x = '+response.x + '(mod '+ response.mod+')'
+            errorMessage.style.visibility = "hidden"
+            successMessage.style.visibility = 'visible'
         },
 
         function error(data, status) {
