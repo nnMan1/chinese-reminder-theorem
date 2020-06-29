@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vigenère cipher</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="http://example.com/myicon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/milerRabin.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&display=swap" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/milerRabin.js') }}" defer></script>
+  </head>
+<body>
+    <div id='main-grid-container'>
+        <div id="header">Generator prostih brojeva</div>
+        
+        <div id = 'input-data'>
+            <p>Koliko bita zelite da sadrzi vas prost broj</p>
+            <input id = 'number-of-digits' type="number" value = 1000>
+            <button onclick="generate()">Generisi</button>
+        </div>       
+        
+    </body>
+</html>
