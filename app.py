@@ -19,6 +19,11 @@ def chinese():
 def primeNumberGenerator():
     return flask.render_template('milerRabin.html')
 
+@app.route('/calculator', methods=['GET'])
+def calculator():
+    return flask.render_template('calcualtor.html')
+
+
 @app.route('/v1/chinese-theorem', methods=['GET'])
 def solveChinese():
     array_string = request.args['data'][1:-1]
