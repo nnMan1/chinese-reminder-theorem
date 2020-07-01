@@ -11,7 +11,7 @@ function generate() {
     })
     .then(
         function success(response) {
-            alert(response)
+            alert(response.p);
         },
 
         function error(data, status) {
