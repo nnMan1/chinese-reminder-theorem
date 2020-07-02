@@ -114,7 +114,7 @@ function linnzd(e){
     }
 
     tmp = blankinship(linnzd1, linnzd2)
-    linnzd_rez.value=tmp[0] + '=' + tmp[1] + '*' + linnzd1 + ' + ' + tmp[2] + ' + ' + linnzd2 ;
+    linnzd_rez.value=tmp[0] + '=' + tmp[1] + '*' + linnzd1 + ' + ' + tmp[2] + ' * ' + linnzd2 ;
 
     details.style.visibility = 'visible'
     tableConteiner.innerHTML = tmp[3]

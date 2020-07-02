@@ -18,7 +18,7 @@ def mod_inverse(b, m):
 def kin_teo(lin_kong):
     ''' Rjesavamo sisteme linearnih kongruencija
     '''
-    m_i, r_i = zip(*lin_kong)
+    m_i, r_i = zip(*lin_kong) #razdvaja niz parova na dva niza 
     M = reduce(int.__mul__, m_i, 1)
     M_i = [M // m for m in m_i]
     y_i = [mod_inverse(c, m) for c, m in zip(M_i, m_i)]
@@ -27,7 +27,7 @@ def kin_teo(lin_kong):
 
 
 def xeuclid(a, b):
-    """ return gcd(a,b), x and y in 'gcd(a,b) = ax + by'.
+    """ gcd(a,b) = ax + by-
     """
     x = [1, 0]
     y = [0, 1]
@@ -68,8 +68,6 @@ def gcd_array(a):
                 return False
 
     return True
-
-
 
 def solve(x):
     tmp = []

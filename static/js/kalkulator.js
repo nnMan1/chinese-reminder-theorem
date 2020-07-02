@@ -1,6 +1,14 @@
 // a + b (mod p)
 function zbir(a, b, p) {
-	return (a+b)%p //vrati mi ostatak pri dijeljenju sa p
+	p = Math.abs(p);
+	var zb=(a+b)%p //vrati mi ostatak pri dijeljenju sa p
+	if(zb< 0){
+		return zb + p; //da bi bila pozitivna vrijednost
+	}
+	else{
+		return zb;
+	
+	}
 }
 
 // a - b (mod p)
@@ -19,7 +27,10 @@ function razlika(a, b, p) {
 // a * b (mod p)
 function proizvod(a, b, p) {
 	p = Math.abs(p);
-	return (a*b)%p;
+	tmp = (a*b)%p;
+	tmp += p;
+	tmp %= p ;
+	return tmp;
 }
 
 	function nzd(a,b) {
@@ -34,28 +45,7 @@ function proizvod(a, b, p) {
 		}
 		
 	
-/*
-// Ova nam funkcija vraca niz u kome je prvi el. NZD(a,b) a drugi string koji sadrzi korake
-function nzd(a,b) {
-	if(a<b){ //ovim pravimo da nam prvi broj bude veci od drugog
-		tmp = b; //ubaci mi u privremenu prom. vrijednost veceg broja
-		b = a; //ubaci mi u b manju vrijednost
-		a = tmp; //u a ubacamo vecu vrijednost
-	}
 
-	var res = ""; //postavljamo rezultat prvo na prazan string
-	while(b>0){
-		res += a + " = "; // a = 
-		res += b + "*" + parseInt(a/b) + " + "; // a = b*(a/b) +
-		tmp = a%b; // privremena prom. koja je jednaka ostatku pri dijeljenju
-		res += tmp + "<br/>"; // a = b*(a/b) + ostatak pa novi red
-		a = b; //sad nam vrijednost iz b prelazi u a, odnosno b prelazi sa lijeve strane jednakosti
-		b = tmp; // b nam sad dobija vrijednost ostatka pri dijeljenju brojeva a i b
-	}
-//ovim smo zapravo simulirali Euklidov algoritam
-	return [a, res];
-}
-*/
 
 // NZS(a,b), njega dobijamo tako sto proizvod ovih brojeva podijelimo sa njihovim NZD-om
 function nzs(a,b) {
@@ -162,7 +152,7 @@ function kongruencija(a,b,m) {
 		return x0;
 	}
 	else{
-		alert('Broj b mora biti djeljiv sa NZD(a,mod)')
+		alert('Broj b mora biti djeljiv sa NZD(a,m)')
 	}
 }
 
@@ -201,6 +191,11 @@ function expmod( base, exp, mod ){
 		var c = n/2;
 		var p = 1;
 		var ns = n;
+		if(n<= 0) { alert('Unesite broj veci od 0!');
+		            return;
+	              } 
+			
+		
 		while(n>1 && d <= c){
 			if(t==true && n%d==0){
 				factors.push(d);
@@ -236,4 +231,5 @@ function expmod( base, exp, mod ){
 		//vracam NaN ukoliko je n preveliki da bi ga bilo moguce efikasno faktorisati
 		return NaN;
 	}
+
 }

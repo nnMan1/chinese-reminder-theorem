@@ -11,13 +11,14 @@ def is_prime(n, k=128):
         return True
     if n <= 1 or n % 2 == 0:
         return False
-    # find r and s
+    # n-1=2^s * r
     s = 0
     r = n - 1
     while r & 1 == 0:
         s += 1
         r //= 2
-    # do k tests
+    # radimo k testova
+    # provjeravamo svjedoke
     for _ in range(k):
         a = randrange(2, n - 1)
         x = pow(a, r, n)
@@ -38,10 +39,10 @@ def generate_prime_candidate(length):
     """ Generate an odd integer randomly        Args:
             length -- int -- the length of the number to generate, in bits        return a integer
     """
-    # generate random bits
+    # generisemo broj bita koliko nam treba
     p = getrandbits(length)
-    # apply a mask to set MSB and LSB to 1
-    p |= (1 << length - 1) | 1    
+    # obezbjedjujemo da na prvom mjestu bude 1 i na poslednjem 1 (da bi osigurali da se radi o neparnom broju)
+    p |= (1 << length - 1) | 1
     return p
     
 
@@ -49,7 +50,7 @@ def generate_prime_number(length=15):
     """ Generate a prime        Args:
             length -- int -- length of the prime to generate, in          bits        return a prime
     """
-    p = 4
+    p = 4 #definisemo pocetno p
     # keep generating while the primality test fail
     while not is_prime(p, 128):
         p = generate_prime_candidate(length)

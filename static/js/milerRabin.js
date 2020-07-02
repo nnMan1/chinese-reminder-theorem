@@ -19,7 +19,7 @@ function generate() {
         },
 
         function error(data, status) {
-            alert('Doslo je do greske i ne znamo kakva je')
+            alert('Unesite pozitivan broj! ')
         }
     )
     
