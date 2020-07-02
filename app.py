@@ -11,7 +11,7 @@ from flask import Response
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-@app.route('/chinese-theorem', methods=['GET'])
+@app.route('/', methods=['GET'])
 def chinese():
     return flask.render_template('chinese.html')
 
