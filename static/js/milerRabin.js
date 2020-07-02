@@ -1,4 +1,6 @@
 let numberOfDigits = document.querySelector("#number-of-digits")
+successMessage = document.querySelector('#success-message')
+errorMessage = document.querySelector('#error-message')
 
 function generate() {
     
@@ -11,11 +13,13 @@ function generate() {
     })
     .then(
         function success(response) {
-            alert(response.p);
+            successMessage.innerHTML = 'x = '+response
+            errorMessage.style.visibility = "hidden"
+            successMessage.style.visibility = 'visible'
         },
 
         function error(data, status) {
-            alert('Provjerite da li su svi parovi modula uzajamno prosti')
+            alert('Doslo je do greske i ne znamo kakva je')
         }
     )
     

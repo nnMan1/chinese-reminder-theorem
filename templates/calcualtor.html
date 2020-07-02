@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Kalkulator</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&display=swap" rel="stylesheet">
+   
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/calculator.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&display=swap" rel="stylesheet">
+	<script src="{{ url_for('static', filename='js/kalkulator.js') }}" defer></script>
+	<script src="{{ url_for('static', filename='js/calculator.js') }}" defer></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/chinese-theorem">Kineska teorema o ostacima<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" href="#">Modularni kalkulator</a>
+            <a class="nav-item nav-link" href="/prime-number-generator">Generator prostog broja</a>
+            </div>
+        </div>
+    </nav>
+
+	
+	<div id="container">
+		<h1 id="glavninaslov">KALKULATOR MODULARNE ARITMETIKE</h1>
+		<br/>
+		<div id="som">
+			<h3>Sabiranje, oduzimanje i množenje po modulu</h3>
+			<form>
+				<input type="text" id="s1" class="form-control" placeholder="Prvi sabirak"> 
+				<span>+</span> 
+				<input type="text" class="form-control" id="s2" placeholder="Drugi sabirak"> 
+				<span> mod </span> 
+				<input type="text" class="form-control" id="mod1">  
+					<button  class="btn btn-primary"  id="dugme1" onclick="sum(event)"> = </button> 
+				<input type="text" class="form-control" id="sR" readonly="readonly" placeholder="Zbir">
+				<br/><br/>
+
+				<input type="text" class="form-control" id="o1" placeholder="Umanjenik"> 
+				<span>-</span> 
+				<input type="text" class="form-control" id="o2" placeholder="Umanjilac"> 
+				<span> mod </span> 
+				<input type="text" class="form-control" id="mod2">  
+					<button  class="btn btn-primary"  id="dugme2" onclick="raz(event)"> = </button> 
+				<input type="text" class="form-control" id="oR" readonly="readonly" placeholder="Razlika">
+				<br/><br/>
+
+				<input type="text" class="form-control" id="m1" placeholder="Prvi činilac"> 
+				<span>*</span> 
+				<input type="text" class="form-control" id="m2" placeholder="Drugi činilac"> 
+				<span> mod </span> 
+				<input type="text" class="form-control" id="mod3"> 
+					<button  class="btn btn-primary"  id="dugme3" onclick="pr(event)"> = </button> 
+				<input type="text" class="form-control" id="mR" readonly="readonly" placeholder="Proizvod">
+
+			
+			</form>
+		</div>
+
+		<div id="nzd">
+			<h3>Najveći zajednički djelilac (NZD)</h3>
+			<form>
+				<input type="text" class="form-control" id="nzd1" placeholder="Prvi broj"> 
+				<input type="text" class="form-control" id="nzd2" placeholder="Drugi broj"> 
+					<button  class="btn btn-primary"  id="dugme4" onclick="najzd(event)"> NZD </button> 
+				<input type="text" class="form-control" id="nzdR" readonly="readonly" placeholder="Rezultat"> 
+				
+				<br/>
+				
+			</form>
+		</div>
+
+		<div id="nzs">
+			<h3>Najmanji zajednički sadržalac (NZS)</h3>
+			<form>
+				<input type="text" class="form-control" id="nzs1" placeholder="Prvi broj"> 
+				<input type="text" class="form-control" id="nzs2" placeholder="Drugi broj"> 
+					<button  class="btn btn-primary"  id="dugme5" onclick="najzs(event)"> NZS </button> 
+				<input type="text" class="form-control" id="nzsR" readonly="readonly" placeholder="Rezultat"> 
+				<div class="valid" id="Greska3"></div>
+				<br/>
+				
+			</form>
+	
+
+		<div id="nzdlin">
+			<h3>NZD kao linearna kombinacija brojeva, urađena Blankinšip metodom</h3>
+			<form>
+				<input type="text" class="form-control" id="linnzd1" placeholder="Prvi broj"> 
+				<input type="text" class="form-control" id="linnzd2" placeholder="Drugi broj"> 
+					<button  class="btn btn-primary"  id="dugme6" onclick="linnzd(event)" > NZD </button> 
+				<input type="text" class="form-control" id="linnzdR" readonly="readonly" placeholder="Rezultat"> 
+				<br>		
+			</form>
+			<div id='details-container' style="visibility: hidden;">
+				<button style=" margin-top: 10px; margin-bottom:10px" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+					Detalji
+				</button>
+
+				<div class="collapse" id="collapseExample">
+					<div class="card card-body">
+					</div>
+				</div>
+			</div>
+
+			</div>
+		</div>
+
+		<div id="inverz">
+			<h3>Inverzni element za dati modulo</h3>
+			<form>
+				<input type="text" class="form-control" id="inverzBr" placeholder="Unesi broj">
+				<span> mod </span>
+				<input type="text" class="form-control" id="inverzMod">
+					<button  class="btn btn-primary"  id="dugme7" onclick="trinverz(event)">Inverz</button>
+				<input type="text" class="form-control" id="inverzR" readonly="readonly" placeholder="Rezultat">
+				<br/>
+				
+			</form>
+		</div>
+
+		<div id="kongr">
+			<h3>Rješavanje kongruencija tipa ax = b (mod m)</h3>
+			<form>
+				<input type="text" class="form-control" id="kongrA" placeholder="Broj a">
+				<span> x &equiv;</span>
+				<input type="text" class="form-control" id="kongrB" placeholder="Broj b">
+				<span> mod </span>
+				<input type="text" class="form-control" id="kongrMod">
+					<button  class="btn btn-primary"  id="dugme8" onclick="reskongr(event)">x</button>
+				<input type="text" class="form-control" id="kongrR" readonly="readonly" placeholder="Rezultat">
+				<br/>
+				
+			</form>
+		</div>
+
+		
+		<div id="stepen">
+			<h3>Rješavanje izraza tipa a^k (mod m)</h3>
+			<form>
+				<input type="text" class="form-control" id="stepA" placeholder="Unesi a">
+				<input type="text" class="form-control" id="stepK" placeholder="Unesi k">
+				<span> mod </span>
+				<input type="text" class="form-control" id="stepMod">
+					<button  class="btn btn-primary"  id="dugme9" onclick="resstkongr(event)"> = </button>
+				<input type="text" class="form-control" id="stepR" readonly="readonly" placeholder="Rezultat">
+				<br/>
+				
+			</form>
+		</div>
+
+
+		<div id="Ojler">
+			<h3>Ojlerova funkcija za broj N</h3>
+			<form>
+				<input type="text" class="form-control"  id="brojn" placeholder="Unesi n" > 
+					<button  class="btn btn-primary"  id="dugme10" onclick="resojl(event)">ɸ(n)</button>
+				<input type="text" class="form-control" id="ojlerR" readonly="readonly" placeholder="Rezultat">
+				<br/>
+				
+			</form>
+		</div>	
+	
+	<br>
+	<br>
+
+	<button  class="btn btn-primary"  id="dugmezauputstvo"  onclick="myFunction()">Uputstvo</button>
+
+    <div id="uputstvo" style="visibility: hidden;">
+	<p>Ovaj kalkulator sadrzi nekoliko opcija za razlicita izracunavanja u modularnoj aritmetici.</p>
+	<p><h4> Opcije za sabiranje, oduzimanje i mnozenje </h4> U ovim opcijama potrebno je da u prva dva prazna polja unesete brojeve. 
+	U polje mod unesite modulo po kojem zelite da racunate. Ukoliko pravilno unesete vijednosti, rezultat dobijete kada pritisnete dugme =.</p>
+	<p> <h4> NZD\NZS</h4>U prva dva polja unesete brojeve za koje zelite da nadjete NZD ili NZS, zatim pristisnete dugme za NZD (NZS)
+    i dobicete rezultat.
+	</p>
+	<p><h4>NZD kao linearna kombinacija brojeva, urađena Blankinšip metodom</h4>
+	U dva polja unesete brojeve za koje računate NZD, na kraju pritisnete dugme NZD da dobijete rezutat.
+	 Rezultat će biti zapisan u obliku linearne kombinacije.
+	</p>
+	<p> <h4>Inverzni element za dati modulo</h4>
+		Unesite broj za koji racunate inverzni element, a u polje za mod unesite modulo po kome racunate. 
+		Rezultat dobijate kad pritisnete dugme Inverz. </p>
+	<p> <h4>Rješavanje kongruencija tipa ax = b (mod m)</h4>
+		Podatke unijeti u polja kao što je označeno. Rezultat dobijete kad pritisnete dugme X. 
+		Ukoliko je kongruencija nije rješiva rezultat će biti NaN.</p>
+	<p> <h4>Rješavanje izraza tipa a^k (mod m)</h4>
+		Podatke unijeti u polja kao što je označeno. Rezultat dobijete kad pritisnete dugme =. </p>
+	<p> <h4>Ojlerova funkcija za broj N</h4>
+		U zadato polje unijeti broj za koji računate Ojlerovu funkciju. 
+		Rezultat dobijete kad pritisnete dugme ɸ(n). Ukoliko je N > 1000012337, rezultat će biti NaN.</p>
+	</div>
+
+<br>
+<br>
+
+</div>
+
+<footer class="page-footer font-small blue">
+
+<!-- Copyright -->
+<div class="footer-copyright text-center py-3">
+	Powered by: Milena Jovovic, Sandra Vujicic, Aleksandar Vujovic, Andrija Boskovic
+</div>
+<!-- Copyright -->
+
+</footer>
+	
+
+</body>
+</html>
